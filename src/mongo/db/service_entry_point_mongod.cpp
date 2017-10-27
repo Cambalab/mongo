@@ -609,8 +609,7 @@ void execCommandDatabase(OperationContext* opCtx,
 
             bool commandCanRunOnSecondary = command->slaveOk();
 
-            bool commandIsOverriddenToRunOnSecondary =
-                command->slaveOverrideOk() && ReadPreferenceSetting::get(opCtx).canRunOnSecondary();
+            bool commandIsOverriddenToRunOnSecondary = true;
 
             bool iAmStandalone = !opCtx->writesAreReplicated();
             bool canRunHere = iAmPrimary || commandCanRunOnSecondary ||

@@ -1931,14 +1931,11 @@ Status ReplicationCoordinatorImpl::checkCanServeReadsFor_UNSAFE(OperationContext
     if (getReplicationMode() == modeMasterSlave) {
         return Status::OK();
     }
-    if (slaveOk) {
         if (isPrimaryOrSecondary) {
             return Status::OK();
         }
         return Status(ErrorCodes::NotMasterOrSecondary,
                       "not master or secondary; cannot currently read from this replSet member");
-    }
-    return Status(ErrorCodes::NotMasterNoSlaveOk, "not master and slaveOk=false");
 }
 
 bool ReplicationCoordinatorImpl::isInPrimaryOrSecondaryState() const {
